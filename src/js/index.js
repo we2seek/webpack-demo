@@ -1,9 +1,10 @@
 import '../style/index.scss';
-// import './img/favicon.png'
-
 import printMe from './print.js';
 
-//require('./src/index.html');
+console.log('*** *** *** *** ***');
+console.log('Site run in %s mode!',
+  process.env.NODE_ENV ? process.env.NODE_ENV.toUpperCase() : 'UNKNOWN');
+console.log('*** *** *** *** ***');
 
 function component() {
   let element = document.createElement('p');
