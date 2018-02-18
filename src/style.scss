@@ -1,0 +1,12 @@
+$color1: #4babe0;
+
+.marked {
+  color: $color1;
+  transition: all 0.25s ease;
+
+  &:hover {
+    cursor: pointer;
+    color: darken($color1, 15%);
+    text-decoration: underline;
+  }
+}
