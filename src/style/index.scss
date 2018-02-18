@@ -1,5 +1,12 @@
 $color1: #4babe0;
 
+body {
+  h4 {
+    font-family: monospace;
+    color: green;
+  }
+}
+
 .marked {
   color: $color1;
   transition: all 0.25s ease;

@@ -1,10 +1,26 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: {
+    index: './src/js/index.js'
+  },
+  devtool: 'inline-source-map',
+  devServer: {
+    contentBase: path.join(__dirname, "dist"),
+    compress: true,
+    port: 9000
+  },
+  plugins: [
+    new CleanWebpackPlugin(['dist']),
+    new HtmlWebpackPlugin({
+      template: './src/index.html'
+    })
+  ],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: '[name].bundle.js'
   },
   module: {
     rules: [{
@@ -14,7 +30,8 @@ module.exports = {
         }, {
           loader: "css-loader",
           options: {
-            sourceMap: true
+            sourceMap: true,
+            minimize: true
           }
         }, {
           loader: "sass-loader",
@@ -30,6 +47,15 @@ module.exports = {
           options: {
             name: '[name].[ext]',
             outputPath: 'img/'
+          }
+        }]
+      }, {
+        test: /\.(html)$/,
+        use: [{
+          loader: 'html-loader',
+          options: {
+            minimize: true,
+            //attrs: ['img:src', 'link:href']
           }
         }]
       }
