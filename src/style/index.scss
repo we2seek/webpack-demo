@@ -1,19 +1,81 @@
 $color1: #4babe0;
+/* Usage:
+@include vendor-prefixes(transform, 'scale(0, 0)');
+*/
 
-body {
-  h4 {
-    font-family: monospace;
-    color: greenyellow;
+@mixin vendor-prefixes($property, $values) {
+  -webkit-#{$property}: #{$values};
+  -moz-#{$property}: #{$values};
+  -ms-#{$property}: #{$values};
+  -o-#{$property}: #{$values};
+  #{$property}: #{$values};
+}
+
+/* Usage
+@include keyframes(my-transition) {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+*/
+
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+  @-moz-keyframes #{$animation-name} {
+    @content;
+  }
+  @-ms-keyframes #{$animation-name} {
+    @content;
+  }
+  @-o-keyframes #{$animation-name} {
+    @content;
+  }
+  @keyframes #{$animation-name} {
+    @content;
   }
 }
 
-.marked {
-  color: $color1;
-  transition: all 0.25s ease;
+.tou-loading {
+  background-color: #f7fcff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 97vh;
+  margin: 0;
+  padding: 0;
+}
 
-  &:hover {
-    cursor: pointer;
-    color: darken($color1, 15%);
-    text-decoration: underline;
+.tou-spinner {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img {
+    position: absolute;
+    &:nth-child(1) {
+      // animation: rotate 1s linear infinite;
+      @include vendor-prefixes(animation, 'rotate 1s linear infinite');
+    }
+  }
+}
+
+// @keyframes rotate {
+//   50% {
+//     transform: rotate(90deg);
+//   }
+//   100% {
+//     transform: rotate(360deg);
+//   }
+// }
+@include keyframes(rotate) {
+  50% {
+    @include vendor-prefixes(transform, 'rotate(90deg)');
+  }
+  100% {
+    @include vendor-prefixes(transform, 'rotate(360deg)');
   }
 }
